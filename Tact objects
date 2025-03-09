@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tact Learning Game</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; }
+        .game-container { max-width: 600px; margin: 20px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0,0,0,0.1); }
+        .image-container img { max-width: 200px; }
+        .buttons { margin-top: 20px; }
+        .buttons button { padding: 10px 15px; font-size: 18px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h2>Tact Learning Game</h2>
+        <p id="category"></p>
+        <div class="image-container">
+            <img id="gameImage" src="" alt="Image will appear here">
+        </div>
+        <div class="buttons">
+            <button onclick="nextItem()">Next</button>
+            <button onclick="playSound()">Play Sound</button>
+        </div>
+    </div>
+
+    <script>
+        const items = [
+            { category: "Objects", word: "Ball", image: "ball.jpg" },
+            { category: "Objects", word: "Car", image: "car.jpg" },
+            { category: "Colors", word: "Red", image: "red-apple.jpg" },
+            { category: "Colors", word: "Blue", image: "blue-toy.jpg" },
+            { category: "Animals", word: "Dog", image: "dog.jpg" },
+            { category: "Animals", word: "Cat", image: "cat.jpg" },
+            { category: "Foods", word: "Banana", image: "banana.jpg" },
+            { category: "Foods", word: "Sandwich", image: "sandwich.jpg" },
+            { category: "Sounds", word: "Ding-dong", sound: "doorbell.mp3" },
+            { category: "Sounds", word: "Bird sound", sound: "bird-chirp.mp3" },
+            { category: "Actions", word: "Jump", image: "jumping.jpg" },
+            { category: "Actions", word: "Clap", image: "clapping.jpg" },
+            { category: "Body Parts", word: "Nose", image: "nose.jpg" },
+            { category: "Body Parts", word: "Ear", image: "ear.jpg" },
+            { category: "Emotions", word: "Happy", image: "happy.jpg" },
+            { category: "Emotions", word: "Sad", image: "sad.jpg" }
+        ];
+        
+        let currentIndex = 0;
+
+        function loadItem(index) {
+            let item = items[index];
+            document.getElementById("category").textContent = `Category: ${item.category}`;
+            let imgElement = document.getElementById("gameImage");
+            
+            if (item.image) {
+                imgElement.src = item.image;
+                imgElement.style.display = "block";
+            } else {
+                imgElement.style.display = "none";
+            }
+        }
+
+        function nextItem() {
+            currentIndex = (currentIndex + 1) % items.length;
+            loadItem(currentIndex);
+        }
+
+        function playSound() {
+            let item = items[currentIndex];
+            if (item.sound) {
+                let audio = new Audio(item.sound);
+                audio.play();
+            }
+        }
+
+        // Load the first item on page load
+        window.onload = () => loadItem(currentIndex);
+    </script>
+</body>
+</html>
