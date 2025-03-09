@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystery Box Tact Activity</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .box { width: 200px; height: 200px; background-color: brown; color: white;
+               display: flex; justify-content: center; align-items: center;
+               margin: auto; cursor: pointer; font-size: 18px; }
+        .hidden { display: none; }
+        .choices { margin-top: 20px; }
+        button { margin: 5px; padding: 10px; font-size: 16px; cursor: pointer; }
+        #message { font-size: 20px; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Mystery Box Tact Activity</h1>
+    <div class="box" id="mysteryBox" onclick="revealObject()">Click to Reveal!</div>
+    <div id="object" class="hidden">
+        <h2>What is this?</h2>
+        <img src="https://via.placeholder.com/150" alt="Revealed Object">
+        <div class="choices">
+            <button onclick="checkAnswer(true)">Correct Answer</button>
+            <button onclick="checkAnswer(false)">Wrong Answer 1</button>
+            <button onclick="checkAnswer(false)">Wrong Answer 2</button>
+        </div>
+    </div>
+    <p id="message"></p>
+    <audio id="correctSound" src="https://www.fesliyanstudios.com/play-mp3/4384"></audio>
+    <script>
+        function revealObject() {
+            document.getElementById('mysteryBox').style.display = 'none';
+            document.getElementById('object').classList.remove('hidden');
+        }
+        function checkAnswer(isCorrect) {
+            if (isCorrect) {
+                document.getElementById('message').innerText = '🎉 Great Job! 🎉';
+                document.getElementById('correctSound').play();
+            } else {
+                document.getElementById('message').innerText = '❌ Try Again!';
+            }
+        }
+    </script>
+</body>
+</html>
